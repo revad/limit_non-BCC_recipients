@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "version": "0.1.0",
+  "name": "Limit non-BCC recipients",
+  "description": "Check that number of non-BCC recipients does not exceed a parameter.",
+  "developer": {
+    "name": "DaveRo"
+  },
+  "applications": {
+    "gecko": {
+      "id": "limit_non-BCC_recipients@davero.addons.mozilla.org",
+      "strict_min_version": "68.0"
+    }
+  },
+  "experiment_apis": {
+    "myapi": {
+      "schema": "myapi/schema.json",
+      "parent": {
+        "scopes":["addon_parent"],
+        "paths": [["myapi"]],
+        "script": "myapi/implementation.js"
+      }
+    }    
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+ "options_ui": {
+    "page": "prefs.html",
+    "browser_style" : true,
+    "chrome_style": true
+  },
+  "permissions": 
+    [ "storage"]
+}

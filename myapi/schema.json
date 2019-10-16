@@ -1,0 +1,20 @@
+[
+  {
+    "namespace": "myapi",
+    "functions": [
+      {
+        "name": "setWindowListener",
+        "type": "function",
+        "description": "Adds a listener to all opening windows",
+        "async": false,
+        "parameters": [
+          {
+            "prefs": "prefsStr",
+            "type": "string",
+            "description": "Prefs as JSON."
+          }
+        ]
+      }
+    ]  
+  }
+]
