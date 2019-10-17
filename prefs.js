@@ -1,5 +1,9 @@
 window.onload = function() {
 
+//Localisation
+  document.getElementById("prefsNonBCCLimit").textContent = browser.i18n.getMessage("prefsNonBCCLimit");
+  document.getElementById("prefsRestart").textContent = browser.i18n.getMessage("prefsRestart");
+
 // Retrieve the stored prefs
 // Same code here and in background.js in case this runs first if addon page open
   var prefs = new Object() ;

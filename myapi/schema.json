@@ -12,6 +12,11 @@
             "prefs": "prefsStr",
             "type": "string",
             "description": "Prefs as JSON."
+          },
+          {
+            "l10n": "l10nStr",
+            "type": "string",
+            "description": "Localisation texts as JSON."
           }
         ]
       }
