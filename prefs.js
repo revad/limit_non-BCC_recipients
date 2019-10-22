@@ -11,15 +11,12 @@ window.onload = function() {
   gettingItem.then(onGot, onError);
 
   function onGot(item) {
-//console.log("Limit non-BCC recipients - PJ: "+JSON.stringify(item));
     
     if (item['prefs']!=null) {
-//console.log("Limit non-BCC recipients - PK"+JSON.stringify(item['prefs']));
       prefs = item['prefs'] ;
     }
     else {
 // Set up defaults if prefs absent
-//console.log("Limit non-BCC recipients - PL: no stored prefs" );
       prefs['maxNonBCC'] = 10 ;	
     	
       browser.storage.local.set({'prefs': prefs})
@@ -43,7 +40,7 @@ window.onload = function() {
     browser.storage.local.set({'prefs': prefs}, onCompletion ) ;
   }
   
-  function onCompletion() {                                                   /* log error is there is one */
+  function onCompletion() {                /* log error is there is one */
     if (chrome.runtime.lastError) {
       console.error("Limit non-BCC recipients: "+ chrome.runtime.lastError);
     } 

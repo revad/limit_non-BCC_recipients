@@ -6,9 +6,8 @@ var myapi = class extends ExtensionCommon.ExtensionAPI {
       myapi : {
 
         setWindowListener(prefsStr, l10nStr) {
-// Adds a listener to detect new compose windows and then detect sending mail
-// Most of this copied from Graeme's Single_domain addon
 
+// Adds a listener to detect new compose windows and then detect sending mail
 console.log("Limit non-BCC recipients - limit: "+ JSON.parse(prefsStr)['maxNonBCC']);
 
           var WindowListener = {
@@ -18,18 +17,15 @@ console.log("Limit non-BCC recipients - limit: "+ JSON.parse(prefsStr)['maxNonBC
                 getInterface(Components.interfaces.nsIDOMWindow);
 
               function onWindowLoad() {
-//console.log("Limit non-BCC recipients - B");                
+          
                 my_compose_window.removeEventListener("load",onWindowLoad);
                 var document = my_compose_window.document;
-//console.log("Limit non-BCC recipients - C: "+document.documentElement.getAttribute("windowtype"));                
+              
                 if (document.documentElement.getAttribute("windowtype") === "msgcompose") 
                 {
                   var mySendButton = document.getElementById("button-send");
                   var myAlertForClosure = function(event) {myAlertToSend(event,prefsStr,l10nStr,document);}  
                   var  myAlertForClosureCommand = function(event) {myAlertToSendCommand(event,prefsStr,l10nStr,document);}
-// this does _not_ remove the old event listeners on change of prefs for some reason
-//                  document.removeEventListener("command",myAlertForClosureCommand);
-//                  mySendButton.removeEventListener("click",myAlertForClosure);
                   document.addEventListener("command",myAlertForClosureCommand,{useCapture:true});
                   mySendButton.addEventListener("click",myAlertForClosure,{useCapture:true});
 
@@ -50,7 +46,6 @@ console.log("Limit non-BCC recipients - limit: "+ JSON.parse(prefsStr)['maxNonBC
 
 // Send button pressed or a command that closes the window
 function myAlertToSendCommand(e,prefsStr,l10nStr,document) {
-//console.log("Limit non-BCC recipients - D: "+e.target.id);
   switch (e.target.id) {
     case "cmd_sendButton":    
     case "key_sendLater":
@@ -58,15 +53,16 @@ function myAlertToSendCommand(e,prefsStr,l10nStr,document) {
     case "cmd_sendNow":
     case "cmd_sendLater":
       e.stopPropagation();
-      myAlertToSend(e,prefsStr,document);
+      myAlertToSend(e,prefsStr,l10nStr,document);
     default:
       break;
     }
 }
+
+
 // Mail sent - do the business!
 function myAlertToSend(e,prefsStr,l10nStr,document) { 
 
-//console.log("Limit non-BCC recipients - C");
   var prefs = JSON.parse(prefsStr);        
   var win = Services.wm.getMostRecentWindow("msgcompose");
   var gCompose = win["gMsgCompose"];
@@ -81,29 +77,18 @@ function myAlertToSend(e,prefsStr,l10nStr,document) {
   toAddress = toAddress.replace(/\"[^\,]*@[^\,]*\"/g,'""'); 
   ccAddress = ccAddress.replace(/\"[^\,]*@[^\,]*\"/g,'""');    
 
-//console.log("Limit non-BCC recipients - To: "+toAddress);
-//console.log("Limit non-BCC recipients - CC: "+ccAddress);
-
 // Count @ symbols
-//console.log("Limit non-BCC recipients - TO: "+(toAddress.match(/@/g) || []).length);
-//console.log("Limit non-BCC recipients - CC: "+(ccAddress.match(/@/g) || []).length);
   var nonbccount = (toAddress.match(/@/g) || []).length + (ccAddress.match(/@/g) || []).length;
-
   maxNonBCCParam = prefs['maxNonBCC'] ;
-
   if (nonbccount > maxNonBCCParam) { 
 
 //TO + CC exceeds parameter - consult user
-
-  var l10n = JSON.parse(l10nStr);
-  var dialogueTitle  = l10n['dialogueTitle'];
-  var dialogueCountLabel  = l10n['dialogueCountLabel'];
-  var dialogueLimitLabel  = l10n['dialogueLimitLabel'];
-  var dialogueQuestion  = l10n['dialogueQuestion'];
-  var dialogueCheckboxLabel  = l10n['dialogueCheckboxLabel'];
-
-//    var dialogue  = 
-
+    var l10n = JSON.parse(l10nStr);
+    var dialogueTitle  = l10n['dialogueTitle'];
+    var dialogueCountLabel  = l10n['dialogueCountLabel'];
+    var dialogueLimitLabel  = l10n['dialogueLimitLabel'];
+    var dialogueQuestion  = l10n['dialogueQuestion'];
+    var dialogueCheckboxLabel  = l10n['dialogueCheckboxLabel'];
 
     var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
                           .getService(Components.interfaces.nsIPromptService);
@@ -113,14 +98,11 @@ function myAlertToSend(e,prefsStr,l10nStr,document) {
 
     if(result)
     {
-
-//console.log("Limit non-BCC recipients - Checkbox: "+JSON.stringify(checkbox));
       if (checkbox['value']) {
 
 // Change all to BCC
 // Save changes to both message composition fields and recipient widgets (why?)
         msgCompFields.bcc = msgCompFields.bcc + "," + msgCompFields.to + "," + msgCompFields.cc ;
-//console.log("Limit non-BCC recipients - V BCC: "+msgCompFields.bcc);
   
         var recipients = document.getElementById("addressingWidget");
         var recipientCount = recipients.getRowCount();
