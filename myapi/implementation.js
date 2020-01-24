@@ -25,8 +25,10 @@ console.log("Limit non-BCC recipients - limit: "+ JSON.parse(prefsStr)['maxNonBC
                 {
                   var mySendButton = document.getElementById("button-send");
                   var myAlertForClosure = function(event) {myAlertToSend(event,prefsStr,l10nStr,document);}  
+/* These were to capture send commands as well as the send button - does not work
                   var  myAlertForClosureCommand = function(event) {myAlertToSendCommand(event,prefsStr,l10nStr,document);}
                   document.addEventListener("command",myAlertForClosureCommand,{useCapture:true});
+*/
                   mySendButton.addEventListener("click",myAlertForClosure,{useCapture:true});
 
                 }
@@ -44,6 +46,7 @@ console.log("Limit non-BCC recipients - limit: "+ JSON.parse(prefsStr)['maxNonBC
 };
 
 
+/* Does not work - command actions (eg blank subject) done before BCC check 
 // Send button pressed or a command that closes the window
 function myAlertToSendCommand(e,prefsStr,l10nStr,document) {
   switch (e.target.id) {
@@ -58,24 +61,28 @@ function myAlertToSendCommand(e,prefsStr,l10nStr,document) {
       break;
     }
 }
+*/
 
 
 // Mail sent - do the business!
 function myAlertToSend(e,prefsStr,l10nStr,document) { 
 
+  e.stopPropagation();
+
   var prefs = JSON.parse(prefsStr);        
   var win = Services.wm.getMostRecentWindow("msgcompose");
   var gCompose = win["gMsgCompose"];
   var msgCompFields = gCompose.compFields;
-// Built-in functions to expand mailing lists
+
   win.Recipients2CompFields(gCompose.compFields);
+// Expands mailing lists
   win.expandRecipients()
 
   var toAddress = msgCompFields.to;          
   var ccAddress = msgCompFields.cc;
 // Remove anything in quotes that contains @
   toAddress = toAddress.replace(/\"[^\,]*@[^\,]*\"/g,'""'); 
-  ccAddress = ccAddress.replace(/\"[^\,]*@[^\,]*\"/g,'""');    
+  ccAddress = ccAddress.replace(/\"[^\,]*@[^\,]*\"/g,'""'); 
 
 // Count @ symbols
   var nonbccount = (toAddress.match(/@/g) || []).length + (ccAddress.match(/@/g) || []).length;
@@ -101,27 +108,14 @@ function myAlertToSend(e,prefsStr,l10nStr,document) {
       if (checkbox['value']) {
 
 // Change all to BCC
-// Save changes to both message composition fields and recipient widgets (why?)
-        msgCompFields.bcc = msgCompFields.bcc + "," + msgCompFields.to + "," + msgCompFields.cc ;
-  
-        var recipients = document.getElementById("addressingWidget");
-        var recipientCount = recipients.getRowCount();
-  
-        for(var i = 0; i < recipientCount; i++)
-        {
-          var elementId = "addressCol1#" + (i+1);
-          var recipientType = document.getElementById(elementId);
-          if(recipientType)
-          {
-            switch(recipientType.value)
-            {
-              case "addr_to":
-              case "addr_cc":
-                document.getElementById(elementId).value = "addr_bcc" ;
-              default:
-                break;
-            }  
-          }    
+
+        if (msgCompFields.to) {        
+          win.awAddRecipients(msgCompFields, "addr_bcc", msgCompFields.to);
+          win.awRemoveRecipients(msgCompFields, "addr_to", msgCompFields.to);
+        }  
+        if (msgCompFields.cc) {        
+        win.awAddRecipients(msgCompFields, "addr_bcc", msgCompFields.cc);
+        win.awRemoveRecipients(msgCompFields, "addr_cc", msgCompFields.cc);
         }
       }
     }    
