@@ -17,11 +17,4 @@ Limitations:
 * It only acts after pressing the SEND button - not the commands 'Send now' or 'Send later'
 * A restart is needed if you change the non-BCC limit
 
-It uses a MailExtension Experiment API containing code derived from legacy addons so is very likely to change, or stop working altogether, as a result of changes in TB between now and the next release, TBv76. A new MailExtension API is needed to implement it properly (bug 1585995).
-
-## Installation
-
-This may or may not be uploaded to ATN in future. Before that use the procedure outlined here:
-https://github.com/revad/use_bcc_instead_A
-
-Please raise issues here.
+It uses a MailExtension Experiment API containing code derived from legacy addons so is very likely to change, or stop working altogether, as a result of changes in TB between now and the next release, TBv78. A new MailExtension API is needed to implement it properly (bug 1585995).
