@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "0.2.0",
+  "version": "0.4.0",
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
@@ -10,18 +10,8 @@
   "applications": {
     "gecko": {
       "id": "limit_non-BCC_recipients@davero.addons.mozilla.org",
-      "strict_min_version": "73.0"
+      "strict_min_version": "75.0a1"
     }
-  },
-  "experiment_apis": {
-    "myapi": {
-      "schema": "myapi/schema.json",
-      "parent": {
-        "scopes":["addon_parent"],
-        "paths": [["myapi"]],
-        "script": "myapi/implementation.js"
-      }
-    }    
   },
   "background": {
     "scripts": [
@@ -34,5 +24,5 @@
     "chrome_style": true
   },
   "permissions": 
-    [ "storage"]
+    [ "storage", "compose", "addressBooks"]
 }
