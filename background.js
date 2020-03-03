@@ -156,7 +156,7 @@ function onGot(item) {
 
 // Non-BCC count exceeded. Open a dialogue popup
       createData={allowScriptsToClose: true,
-      width : 300,
+      width : 600,
       height : 300,
       type : "popup",
       url : "dialogue.html?" + nonbcc + "&" + prefs['maxNonBCC']

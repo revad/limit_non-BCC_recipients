@@ -1,56 +1,56 @@
 {
   "extensionName": {
-    "message": "Limit der nicht ausgeblendeten Empfänger",
+    "message": "Limitar el número de direcciones fuera de Bcc",
     "description": "Name of the extension."
   },
 
   "extensionDescription": {
-    "message": "Stellen Sie sicher, dass die Anzahl der Empfänger An oder CC einen Parameter nicht überschreitet.",
+    "message": "Verificar del número de direcciones A o Cc sea menor que un parámetro.",
     "description": "Description of the extension."
   },
 
   "prefsNonBCCLimit" : {
-    "message": "Wie viele Empfänger An oder CC bevor eine Warnung ausgegeben wird?",
+    "message": "Número máximo permitido de direcciones A y Cc",
     "description": "Non-BCC limit label"
   },
 
   "prefsRestart": {
-    "message": "Nach Änderungen ist ein Neustart erforderlich.",
+    "message": "Requiere reiniciar para que surta efecto.",
     "description": "Restart required message"
   },
 
   "dialogueTitle": {
-    "message": "Limit der Empfänger An und CC überschritten!",
+    "message": "Número máximo configurado de direcciones A o Cc superato",
     "description": "Dialogue title"
   },
 
   "dialogueCountLabel": {
-    "message": "Empfänger nicht BCC",
+    "message": "Número de direcciones fuera de Bcc",
     "description": "Non-BCC count label"
   },
 
   "dialogueLimitLabel": {
-    "message": "Maximal zulässige",
+    "message": "Su limite",
     "description": "Non-BCC limit label"
   },
 
   "dialogueQuestion": {
-    "message": "Trotzdem senden?",
+    "message": "¿Enviar en todo caso?",
     "description": "Dialogue question"
   },
 
    "dialogueQuestionOK": {
-    "message": "OK",
+    "message": "Si",
     "description": "OK - response to dialogueQuestion"
   },
 
   "dialogueQuestionCancel": {
-    "message": "Abbrechen",
+    "message": "No",
     "description": "Cancel - response to dialogueQuestion"
   },
 
   "dialogueCheckboxLabel": {
-    "message": "Alle Empfänger auf BCC umzustellen?",
+    "message": "¿Convierte todos los destinatarios A o Cc a Bcc?",
     "description": "Change all to BCC checkbox label"
   }
 

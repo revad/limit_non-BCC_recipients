@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Limiter les destinataires non cachés MX",
+    "message": "Limiter les destinataires non cachés",
     "description": "Name of the extension."
   },
 
@@ -46,7 +46,7 @@
 
   "dialogueQuestionCancel": {
     "message": "Annuler",
-    "description": "Concel - response to dialogueQuestion"
+    "description": "Cancel - response to dialogueQuestion"
   },
 
   "dialogueCheckboxLabel": {

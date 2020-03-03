@@ -1,6 +1,6 @@
 {
   "extensionName": {
-    "message": "Limit non-BCC recipients MX",
+    "message": "Limit non-BCC recipients",
     "description": "Name of the extension."
   },
 
@@ -46,7 +46,7 @@
 
   "dialogueQuestionCancel": {
     "message": "Cancel",
-    "description": "Concel - response to dialogueQuestion"
+    "description": "Cancel - response to dialogueQuestion"
   },
 
   "dialogueCheckboxLabel": {

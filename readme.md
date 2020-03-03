@@ -1,4 +1,4 @@
-# Thunderbird addon: Limit non-BCC Recipients MX
+# Thunderbird addon: Limit non-BCC Recipients (MX)
 
 ## Description
 
@@ -19,5 +19,5 @@ Requires Thunderbird version 75+
 
 ## Limitations
 
-Currently, sending fails with mailing lists.
+Currently, sending fails with mailing lists (bug 1619057).
 (But you can expand them and then send: https://github.com/revad/expand_mailing_lists )
