@@ -20,7 +20,7 @@
   },
 
   "dialogueTitle": {
-    "message": "Número máximo configurado de direcciones A o Cc superato",
+    "message": "¡Número máximo configurado de direcciones A o Cc excedidas!",
     "description": "Dialogue title"
   },
 
