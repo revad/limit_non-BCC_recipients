@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
   "default_locale": "en",
@@ -23,7 +23,7 @@
     "browser_style" : true,
     "chrome_style": true
   },
-  "permissions": 
+  "permissions":
     [ "storage", "compose", "addressBooks"],
   "icons": {
     "48": "icons/hidden_contacts_48.png"

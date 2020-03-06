@@ -19,7 +19,7 @@ function onGot(item) {
     browser.storage.local.set({'prefsStr': prefs})
       .then( null, onError);
   }
-  console.log("Limit non-BCC recipients: limit: " + prefs['maxNonBCC'])
+  // console.log("Limit non-BCC recipients: limit: " + prefs['maxNonBCC'])
 
 // Listen for about-to-be-sent messsage
   async function listenforsend(tabid, details) { //15
@@ -169,13 +169,17 @@ function onGot(item) {
 
 // Wait for response from popup
       let response = new Promise((resolve) => {
-          async function gotmessage(msg) {
-            // console.log(msg);
-            browser.windows.remove(wid);
-            browser.runtime.onMessage.removeListener(gotmessage);
-            resolve(msg);
+          async function gotmessage(msg, sender) {
+            // console.log("Message: "+JSON.stringify(msg));
+            // console.log("Sender: " +JSON.stringify(sender));
+// Only resolve responses from the dialogue window which will have frameID zero
+            if (sender.frameId == 0 ) {
+              browser.windows.remove(wid);
+              browser.runtime.onMessage.removeListener(gotmessage);
+              resolve(msg);
+            }
           }
-
+// There is a second listener for pref changes
           browser.runtime.onMessage.addListener(gotmessage);
 
       });
@@ -229,9 +233,24 @@ function onGot(item) {
 // Register the onBeforeSend listener
   browser.compose.onBeforeSend.addListener(listenforsend) ;
 
+// Listener for changed prefs - 2nd listener for messages
+  function gotmessage2(msg, sender) {
+    // console.log("Message2: "+JSON.stringify(msg));
+    // console.log("Sender2: " +JSON.stringify(sender));
+// Only resolve responses from the prefs window which will have frameID non-zero
+    if (sender.frameId != 0 ) {
+      if (msg.maxNonBCC !== "undefined"){
+        prefs = msg ;
+        // console.log("Limit non-BCC recipients: limit changed to: " + prefs['maxNonBCC'])
+      }
+    }
+  }
+
+  browser.runtime.onMessage.addListener(gotmessage2);
+
 }
 
 // Error getting prefs
 function onError(error) {
-  console.log("Limit non-BCC recipients: "+ error)
+  // console.log("Limit non-BCC recipients: "+ error)
 }
