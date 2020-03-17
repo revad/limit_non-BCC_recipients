@@ -193,20 +193,17 @@ function onGot(item) {
       var returnobj = new Object()
 
       if (mess == "bcc_cancel") {
-      returnobj['details'] = details ;
       returnobj['cancel'] = true ;
       }
 
       if (mess == "bcc_ok_false") {
-      returnobj['details'] = details ;
-
 //TESTING - Change to true to stop sending
       returnobj['cancel'] = false ;
       }
 
       if (mess == "bcc_ok_true") {
 // Move To and CC to BCC
-      returnobj['details'] = details ;
+      returnobj['details'] = {} ;     
       returnobj['details']['bcc'] = details['bcc'].concat(details['to'], details['cc'])
       returnobj['details']['to'] = []
       returnobj['details']['cc'] = []
@@ -222,7 +219,6 @@ function onGot(item) {
     } else {
 // Non-BCC count not exceeded - continue with send
       var returnobj = new Object();
-      returnobj['details'] = details ;
 //TESTING - Change to true to stop sending
       returnobj['cancel'] = false ;
       return returnobj ;

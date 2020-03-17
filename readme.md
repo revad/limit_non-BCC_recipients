@@ -4,14 +4,15 @@
 
 This Mail Extension is a partial replacement for the Use BCC Instead C addon, which will not work after TBv70. 
 It offers these features of Use BCC Instead:
-* Counts email recipients and compares that with the user's limit (parameter)
+* Counts 'To' and 'CC' email recipients and compares the total with the user's limit (in preferences)
 * Recipients in mailing lists are counted
-* If the limit is exceeded it displays a dialog - cancel or continue
-* There is an option to continue but change all recipients to BCC
+* If the limit is exceeded it displays a dialog - send or cancel
+* There is an option to send but change all recipients to BCC
 
 It does not offer these features of Use BCC Instead:
 * Change the default in the compose window from TO to BCC
 * A button to change all recipients between TO, CC, and BCC
+* An extra column -  'Recipient Extended' - in the thread pane
 
 ## Requirements
 
@@ -19,5 +20,5 @@ Requires Thunderbird version 75+
 
 ## Limitations
 
-Currently, sending fails with mailing lists (bug 1619057).
-(But you can expand them and then send: https://github.com/revad/expand_mailing_lists )
+Currently, sending fails with mailing lists (Thunderbird bug 1619057).
+(You can expand them with this addon https://github.com/revad/expand_mailing_lists)
