@@ -17,8 +17,3 @@ It does not offer these features of Use BCC Instead:
 ## Requirements
 
 Requires Thunderbird version 75+
-
-## Limitations
-
-Currently, sending fails with mailing lists (Thunderbird bug 1619057).
-(You can expand them with this addon https://github.com/revad/expand_mailing_lists)
