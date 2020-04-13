@@ -191,6 +191,7 @@ function onGot(item) {
 // Action according to response
 
       var returnobj = new Object()
+      returnobj['details'] = {} ;      
 
       if (mess == "bcc_cancel") {
       returnobj['cancel'] = true ;
@@ -203,7 +204,7 @@ function onGot(item) {
 
       if (mess == "bcc_ok_true") {
 // Move To and CC to BCC
-      returnobj['details'] = {} ;     
+   
       returnobj['details']['bcc'] = details['bcc'].concat(details['to'], details['cc'])
       returnobj['details']['to'] = []
       returnobj['details']['cc'] = []
